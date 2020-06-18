@@ -13,7 +13,7 @@ JDK_MAX=
 
 setJDKMax() {
   JDK_MAX=$(wget -q https://api.adoptopenjdk.net/v3/info/available_releases -O - \
-	  | grep 'most_recent_feature_version' \
+	  | grep 'tip_version' \
 	  | cut -d':' -f 2 \
 	  | sed 's/,//g; s/ //g')
 }
