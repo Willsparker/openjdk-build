@@ -198,7 +198,7 @@ buildOpenJDKViaDocker()
   fi
 
   # Run the command string in Docker
-  ${BUILD_CONFIG[DOCKER]} run --name "${BUILD_CONFIG[OPENJDK_CORE_VERSION]}-${BUILD_CONFIG[BUILD_VARIANT]}" "ls -la /openjdk/ && ${commandString[@]}"
+  ${BUILD_CONFIG[DOCKER]} run --name "${BUILD_CONFIG[OPENJDK_CORE_VERSION]}-${BUILD_CONFIG[BUILD_VARIANT]}" "${commandString[@]}"
  
   # If we didn't specify to keep the container then remove it
   if [[ "${BUILD_CONFIG[KEEP_CONTAINER]}" == "false" ]] ; then
