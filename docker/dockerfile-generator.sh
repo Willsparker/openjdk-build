@@ -149,6 +149,7 @@ RUN apt-get update \\
   && apt-get -y upgrade \\
   && apt-get install -qq -y --no-install-recommends \\
     autoconf \\
+    cmake \\
     cpio \\
     curl \\
     file \\
