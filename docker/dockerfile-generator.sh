@@ -161,6 +161,7 @@ RUN apt-get update \\
     libfreetype6-dev \\
     libx11-dev \\
     libxext-dev \\
+    libxi-dev \\
     libxrandr-dev \\
     libxrender-dev \\
     libxt-dev \\
@@ -175,6 +176,8 @@ RUN apt-get update \\
   if [ ${OPENJ9} = true ]; then
     echo "    libdwarf-dev \\
     libnuma-dev \\
+    libssl-dev \\
+    zlib1g-dev \\
     nasm \\
     pkg-config \\" >> $DOCKERFILE_PATH
   else 
