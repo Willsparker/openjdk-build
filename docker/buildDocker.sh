@@ -165,7 +165,7 @@ buildDocker()
 setupGit()
 {
 	if [ ! -d "$WORKSPACE/DockerBuildFolder/$jdkVersion-$buildVariant/docker" ]; then
-		git clone https://github.com/adoptopenjdk/openjdk-build $WORKSPACE/DockerBuildFolder/$jdkVersion-$buildVariant
+		git clone -b https://github.com/willsparker/openjdk-build $WORKSPACE/DockerBuildFolder/$jdkVersion-$buildVariant
 	else
 		cd $WORKSPACE/DockerBuildFolder/$jdkVersion-$buildVariant
 		git pull
