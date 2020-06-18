@@ -260,9 +260,9 @@ printUserCreate(){
 ARG HostUID
 ENV HostUID=\$HostUID
 RUN useradd -u \$HostUID -ms /bin/bash build
+WORKDIR /openjdk/build/
 RUN chown -R build /openjdk/
-USER build
-WORKDIR /openjdk/build/" >> $DOCKERFILE_PATH
+USER build" >> $DOCKERFILE_PATH
 }
 
 printContainerVars(){
