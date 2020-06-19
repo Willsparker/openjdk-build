@@ -10,12 +10,19 @@ DOCKERFILE_PATH=
 # Default to JDK8
 JDK_VERSION=8
 JDK_MAX=
+JDK_GA=
 
-setJDKMax() {
-  JDK_MAX=$(wget -q https://api.adoptopenjdk.net/v3/info/available_releases -O - \
+setJDKVars() {
+  wget -q https://api.adoptopenjdk.net/v3/info/available_releases
+  JDK_MAX=$(cat available_releases \
 	  | grep 'tip_version' \
 	  | cut -d':' -f 2 \
 	  | sed 's/,//g; s/ //g')
+  JDK_GA=$(cat available_releases \
+          | grep 'most_recent_feature_release' \
+          | cut -d':' -f 2 \
+          | sed 's/,//g; s/ //g')
+  rm available_releases
 }
 
 processArgs() {
@@ -230,6 +237,7 @@ RUN ln -s /usr/lib/x86_64-linux-gnu /usr/lib64 \\
 }
 
 printDockerJDKs() {
+  # JDK8 uses zulu-7 as it's bootjdk
   if [ ${JDK_VERSION} != 8 ]; then
     if [ ${COMMENTS} == true ]; then
       echo "
@@ -238,6 +246,17 @@ printDockerJDKs() {
     printJDK $((JDK_VERSION-1))
     echo "RUN ln -sf /usr/lib/jvm/jdk$((JDK_VERSION-1))/bin/java /usr/bin/java" >> $DOCKERFILE_PATH
     echo "RUN ln -sf /usr/lib/jvm/jdk$((JDK_VERSION-1))/bin/javac /usr/bin/javac" >> $DOCKERFILE_PATH
+  fi
+
+  # Build 'jdk' with the most recent GA release
+  if [ ${JDK_VERSION} == ${JDK_MAX} ]; then
+    if [ ${COMMENTS} == true ]; then
+      echo "
+    # Extract JDK${JDK_GA} to use as a boot jdk" >> $DOCKERFILE_PATH
+    fi
+    printJDK ${JDK_GA}
+    echo "RUN ln -sf /usr/lib/jvm/jdk${JDK_GA}/bin/java /usr/bin/java" >> $DOCKERFILE_PATH
+    echo "RUN ln -sf /usr/lib/jvm/jdk${JDK_GA}/bin/javac /usr/bin/javac" >> $DOCKERFILE_PATH
   fi
  
   # if JDK_VERSION is 9, another jdk8 doesn't need to be extracted
@@ -310,7 +329,7 @@ BUILD_CONFIG[BUILD_FULL_NAME]=\"linux-x86_64-normal-server-release\"" >> $DOCKER
 fi
 }
 
-setJDKMax
+setJDKVars
 processArgs "$@"
 generateFile
 generateConfig
