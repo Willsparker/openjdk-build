@@ -192,8 +192,6 @@ RUN apt-get update \\
     libgmp3-dev \\
     zlib1g-dev \\
     nasm \\
-    gcc-7 \\
-    g++-7 \\
     pkg-config \\" >> $DOCKERFILE_PATH
   else 
     echo "    ccache \\
