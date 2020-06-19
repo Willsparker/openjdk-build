@@ -185,6 +185,8 @@ RUN apt-get update \\
     libgmp3-dev \\
     zlib1g-dev \\
     nasm \\
+    gcc-7 \\
+    g++-7 \\
     pkg-config \\" >> $DOCKERFILE_PATH
   else 
     echo "    ccache \\
@@ -316,7 +318,8 @@ printPreamble
 printAptPackages
 # OpenJ9 MUST use gcc7, HS doesn't have to
 if [ ${OPENJ9} == true ]; then
-  printgcc
+  #printgcc
+  echo "NOT USING PREBUILT GCC7"
 fi
 
 printDockerJDKs
