@@ -130,8 +130,8 @@ manualDockerCommands()
 	local jdk=$1
 	docker build -t $jdk-$buildVariant-dfc -f Dockerfile .
 	docker run -it -u root -d --name=${jdk}-$buildVariant $jdk-$buildVariant-dfc
-	docker exec -u root -i ${jdk}-$buildVariant sh -c "git clone https://github.com/ibmruntimes/openj9-openjdk-${jdk%?}"
-	docker exec -u root -i ${jdk}-$buildVariant sh -c "cd openj9-openjdk-${jdk%?} && bash ./get_source.sh && bash ./configure --with-freemarker-jar=/root/freemarker.jar && make all"
+	docker exec -u root -i ${jdk}-$buildVariant sh -c "git clone https://github.com/ibmruntimes/openj9-openjdk-${jdk}"
+	docker exec -u root -i ${jdk}-$buildVariant sh -c "cd openj9-openjdk-${jdk} && bash ./get_source.sh && bash ./configure --with-freemarker-jar=/root/freemarker.jar && make all"
 	docker stop ${jdk}-$buildVariant
 	docker rm ${jdk}-$buildVariant
 	docker rmi ${jdk}-${buildVariant}-dfc
