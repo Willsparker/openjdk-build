@@ -177,6 +177,12 @@ RUN apt-get update \\
     echo "    libdwarf-dev \\
     libnuma-dev \\
     libssl-dev \\
+    libffi-dev \\
+    libexpat1-dev \\
+    libcurl4-openssl-dev \\
+    libmpfr-dev \\
+    libwww-perl \\
+    libgmp3-dev \\
     zlib1g-dev \\
     nasm \\
     pkg-config \\" >> $DOCKERFILE_PATH
