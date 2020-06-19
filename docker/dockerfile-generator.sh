@@ -318,8 +318,7 @@ printPreamble
 printAptPackages
 # OpenJ9 MUST use gcc7, HS doesn't have to
 if [ ${OPENJ9} == true ]; then
-  #printgcc
-  echo "NOT USING PREBUILT GCC7"
+  printgcc
 fi
 
 printDockerJDKs
