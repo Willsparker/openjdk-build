@@ -158,7 +158,11 @@ RUN apt-get update \\
   && apt-get update \\
   && apt-get -y upgrade \\
   && apt-get install -qq -y --no-install-recommends \\
+    ant \\
+    ant-contrib \\
     autoconf \\
+    build-essential \\
+    ca-certificates \\
     cmake \\
     cpio \\
     curl \\
@@ -177,6 +181,7 @@ RUN apt-get update \\
     libxt-dev \\
     libxtst-dev \\
     make \\
+    perl \\
     ssh \\
     systemtap-sdt-dev \\
     unzip \\
@@ -189,12 +194,10 @@ RUN apt-get update \\
     libssl-dev \\
     libffi-dev \\
     libexpat1-dev \\
-    libcurl4-openssl-dev \\
-    libmpfr-dev \\
-    libwww-perl \\
-    libgmp3-dev \\
     zlib1g-dev \\
     nasm \\
+    libfontconfig \\
+    xvfb \\
     pkg-config \\" >> $DOCKERFILE_PATH
   else 
     echo "    ccache \\
@@ -287,6 +290,13 @@ printGitClone(){
 RUN git clone https://github.com/adoptopenjdk/openjdk-build /openjdk/build/openjdk-build" >> $DOCKERFILE_PATH
 }
 
+printFindLibraries() {
+echo "
+# Run ldconfig to discover newly installed shared libraries.
+RUN for dir in lib lib64 ; do echo /usr/local/ ; done > /etc/ld.so.conf.d/usr-local.conf \\
+ && ldconfig" >> $DOCKERFILE_PATH
+}
+
 printUserCreate(){
   echo "
 ARG HostUID
@@ -350,7 +360,7 @@ if [ ${BUILD} == false ]; then
 else
   printGitClone
 fi
-
+printFindLibraries
 printUserCreate
 printContainerVars
 
