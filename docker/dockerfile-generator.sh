@@ -230,11 +230,11 @@ RUN cd /usr/local \\
   && rm -rf gcc-7.tar.xz" >> $DOCKERFILE_PATH
 
   echo "
-RUN ln -s /usr/lib/x86_64-linux-gnu /usr/lib64 \\
-  && ln -s /usr/include/x86_64-linux-gnu/* /usr/local/gcc/include \\
-  && ln -s /usr/local/gcc/bin/g++-7.5 /usr/bin/g++ \\
-  && ln -s /usr/local/gcc/bin/gcc-7.5 /usr/bin/gcc \\
-  && ln -s /usr/local/gcc/bin/ccache /usr/local/bin/ccache" >> $DOCKERFILE_PATH
+RUN ln -sf /usr/lib/x86_64-linux-gnu /usr/lib64 \\
+  && ln -sf /usr/include/x86_64-linux-gnu/* /usr/local/gcc/include \\
+  && ln -sf /usr/local/gcc/bin/g++-7.5 /usr/bin/g++ \\
+  && ln -sf /usr/local/gcc/bin/gcc-7.5 /usr/bin/gcc \\
+  && ln -sf /usr/local/gcc/bin/ccache /usr/local/bin/ccache" >> $DOCKERFILE_PATH
 }
 
 printDockerJDKs() {
