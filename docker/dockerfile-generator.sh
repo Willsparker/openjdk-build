@@ -86,6 +86,7 @@ processArgs() {
 
   if [ ${cleanRepo} ]; then
     echo "Removing Dockerfile* from $DOCKERFILE_DIR" && rm -rf $DOCKERFILE_DIR/Dockerfile*
+    ls -la $DOCKERFILE_DIR
   fi
 
   DOCKERFILE_PATH="$DOCKERFILE_DIR/Dockerfile"
