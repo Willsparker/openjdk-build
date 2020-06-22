@@ -239,7 +239,7 @@ RUN ln -s /usr/lib/x86_64-linux-gnu /usr/lib64 \\
 
 printDockerJDKs() {
   # JDK8 uses zulu-7 as it's bootjdk
-  if [ ${JDK_VERSION} != 8 ]; then
+  if [ ${JDK_VERSION} != 8 ] && [ ${JDK_VERSION} != ${JDK_MAX} ]; then
     if [ ${COMMENTS} == true ]; then
       echo "
     # Extract JDK$((JDK_VERSION-1)) to use as a boot jdk" >> $DOCKERFILE_PATH
@@ -248,7 +248,7 @@ printDockerJDKs() {
     echo "RUN ln -sf /usr/lib/jvm/jdk$((JDK_VERSION-1))/bin/java /usr/bin/java" >> $DOCKERFILE_PATH
     echo "RUN ln -sf /usr/lib/jvm/jdk$((JDK_VERSION-1))/bin/javac /usr/bin/javac" >> $DOCKERFILE_PATH
   fi
-
+  
   # Build 'jdk' with the most recent GA release
   if [ ${JDK_VERSION} == ${JDK_MAX} ]; then
     if [ ${COMMENTS} == true ]; then
