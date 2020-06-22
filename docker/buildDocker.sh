@@ -117,7 +117,7 @@ useEclipseDockerFiles()
 	# This Dockerfile requires an ssh key, authorized_key and known_hosts file to build
 	ssh-keygen -q -f id_rsa -t rsa -N ''
 	cat id_rsa.pub >> authorized_keys
-	touch known_hosts
+	ssh-keyscan github.com >> $PWD/known_hosts
 
 	for jdk in $jdkVersion
 	do

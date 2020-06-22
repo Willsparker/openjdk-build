@@ -22,8 +22,6 @@ setJDKVars() {
           | grep 'most_recent_feature_release' \
           | cut -d':' -f 2 \
           | sed 's/,//g; s/ //g')
-  echo "THIS IS JDK_GA: $JDK_GA"
-  echo "THIS IS JDK_MAX: $JDK_MAX"
   rm available_releases
 }
 
