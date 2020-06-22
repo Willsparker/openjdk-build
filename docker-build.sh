@@ -84,6 +84,8 @@ buildOpenJDKViaDocker()
   else
     docker/dockerfile-generator.sh --version "${BUILD_CONFIG[OPENJDK_FEATURE_NUMBER]}" --path "${BUILD_CONFIG[DOCKER_FILE_PATH]}"
   fi
+  echo "This is the dockerfile!"
+  cat "${BUILD_CONFIG[DOCKER_FILE_PATH]}/Dockerfile*"
   # shellcheck disable=SC1090
   source "${BUILD_CONFIG[DOCKER_FILE_PATH]}/dockerConfiguration.sh"
 

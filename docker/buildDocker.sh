@@ -121,7 +121,7 @@ useEclipseDockerFiles()
 
 	for jdk in $jdkVersion
 	do
-		manualDockerCommands $jdk
+		manualDockerCommands ${jdk%?}
 	done
 }
 
