@@ -158,7 +158,6 @@ RUN apt-get update \\
     ant \\
     ant-contrib \\
     autoconf \\
-    build-essential \\
     ca-certificates \\
     cmake \\
     cpio \\
