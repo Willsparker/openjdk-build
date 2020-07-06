@@ -506,15 +506,11 @@ class Build {
             if (cleanWorkspace) {
                 try {
                     if (buildConfig.TARGET_OS == "windows") {
-                        List<String> envVars = buildConfig.toEnvVars()
-                        envVars.add("FILENAME=${filename}" as String)
-                        context.withEnv(envVars) {
                         // Windows machines struggle to clean themselves, see:
                         // https://github.com/AdoptOpenJDK/openjdk-build/issues/1855
+                        context.sh(script: "rm -rf C:/workspace/openjdk-build/workspace/build/src/build/*/jdk/gensrc")
                         // https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1419
-                          context.sh(script: "echo 'this is the var pwd' $workspace")
-                        //context.sh(script: "rm -rf ${workspace}/build/src/build/*/jdk/gensrc")
-			}
+                        context.sh(script: "rm -rf J:/jenkins/tmp/workspace/build/src/build/*/jdk/gensrc")
                         context.cleanWs notFailBuild: true, disableDeferredWipeout: true, deleteDirs: true
                     } else {
                         context.cleanWs notFailBuild: true
