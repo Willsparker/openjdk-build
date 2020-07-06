@@ -509,7 +509,7 @@ class Build {
                         // Windows machines struggle to clean themselves, see:
                         // https://github.com/AdoptOpenJDK/openjdk-build/issues/1855
                         // https://github.com/AdoptOpenJDK/openjdk-infrastructure/issues/1419
-                        context.sh(script: "rm -rf ${WORKSPACE}/workspace/build/src/build/*/jdk/gensrc")
+                        context.sh(script: "rm -rf ${WORKSPACE}/build/src/build/*/jdk/gensrc")
                         context.cleanWs notFailBuild: true, disableDeferredWipeout: true, deleteDirs: true
                     } else {
                         context.cleanWs notFailBuild: true
