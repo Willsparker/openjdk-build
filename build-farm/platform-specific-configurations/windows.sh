@@ -126,6 +126,7 @@ then
 
     if [ "${JAVA_TO_BUILD}" == "${JDK8_VERSION}" ]
     then
+      TOOLCHAIN_VERSION="2013"
       export BUILD_ARGS="${BUILD_ARGS} --freetype-version 2.5.3"
       export INCLUDE="C:\Program Files\Debugging Tools for Windows (x64)\sdk\inc;$INCLUDE"
       export PATH="$PATH:/c/cygwin64/bin"
